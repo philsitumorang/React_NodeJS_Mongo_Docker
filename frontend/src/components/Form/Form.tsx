@@ -7,6 +7,11 @@ import { LightFontWeight } from "../../Style";
 import { Delete } from "./Style";
 
 export default function Form(props: any) {
+  if (props.currentUser === undefined) {
+    return (
+      <></>
+    );
+  }
   return (
     <Drawer
       open={props.open}
@@ -47,7 +52,7 @@ export default function Form(props: any) {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DesktopDatePicker
                   label="Date of birth"
-                  value={props.formik.values.dob || props.currentUser.dob}
+                  value={props.formik.values.dob || props.pickerData}
                   onChange={props.onChangeDate}
                   renderInput={(params) => <TextField {...params} />}
                 />

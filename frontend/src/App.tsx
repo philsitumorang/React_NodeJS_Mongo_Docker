@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import { nanoid } from "@reduxjs/toolkit";
 import dayjs, { Dayjs } from 'dayjs';
 import { Box, Container, Typography, Snackbar } from "@mui/material";
@@ -12,25 +11,7 @@ import { useAppSelector, useAppDispatch } from './hooks';
 import {
   LightFontWeight, ProfileWrapper
 } from "./Style";
-
-const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email('Enter a valid email')
-    .max(32),
-  name: yup
-    .string()
-    .max(32),
-  role: yup
-    .string()
-    .max(32),
-  department: yup
-    .string()
-    .max(32),
-  salary: yup
-    .string()
-    .max(12)
-});
+import { initialValues, validation } from "./api/api";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -47,7 +28,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [dispatch]);
 
   const onHandle = (e: any) => {
     formik.handleChange(e);
@@ -64,23 +45,9 @@ function App() {
     setTimeout(() => setOpenNotification(""), 3000);
   }
 
-  const onChangeDate = (newValue: any) => {
-    const _user: any = {...currentUser};
-    _user.dob = newValue;
-    dispatch(setCurrent(_user));
-    setPickerData(newValue);
-  }
-
   const formik = useFormik({
-    initialValues: {
-      email: "",
-      name: "",
-      role: "",
-      department: "",
-      dob: "",
-      salary: "1"
-    },
-    validationSchema: validationSchema,
+    initialValues,
+    validationSchema: validation(),
     onSubmit: (value: any) => {
       value._id = currentUser?._id;
       value.salary = +value.salary.replace(/[\D]/g, '');
@@ -111,8 +78,9 @@ function App() {
           title={"Profile Editor"}
           buttonText={"Update"}
           onDelete={onDelete}
-          onChangeDate={onChangeDate}
+          onChangeDate={setPickerData}
           currentUser={currentUser}
+          pickerData={pickerData}
         />
       ) : null}
       
