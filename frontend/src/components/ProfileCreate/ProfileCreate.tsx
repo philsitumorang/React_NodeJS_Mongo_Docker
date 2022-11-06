@@ -3,10 +3,11 @@ import Card from '@mui/material/Card';
 import AddIcon from '@mui/icons-material/Add';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { createUser, IUser } from '../api/slice';
-import { useAppDispatch } from '../hooks';
-import Form from './Form';
+import { createUser, IUser } from '../../api/slice';
+import { useAppDispatch } from '../../hooks';
+import Form from '../Form/Form';
 import Snackbar from '@mui/material/Snackbar';
+import { CardIconStyle, CardStyle } from "./Style";
 
 const validationSchema = yup.object({
   email: yup
@@ -77,25 +78,8 @@ export default function ProfileCreate() {
         />
       <Card 
         onClick={handleOpen}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          maxWidth: 345, 
-          minHeight: 320,
-          flexBasis: 260,
-          margin: {
-            xs: "0 auto",
-            md: "0"
-          },
-          position: 'relative',
-          cursor: "pointer"
-      }}>
-          <AddIcon sx={{
-              width: 100,
-              height: 100,
-              color: '#1976d2',
-          }} />
+        sx={CardStyle}>
+          <AddIcon sx={CardIconStyle} />
       </Card>
     </>
   );

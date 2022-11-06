@@ -7,7 +7,8 @@ import {
   Typography
 } from "@mui/material";
 import PersonIcon from '@mui/icons-material/Person';
-import { IUser } from '../api/slice';
+import { IUser } from '../../api/slice';
+import { BoxCenterStyle, ButtonStyle, CardStyle, PersonIconStyle } from "./Style";
 
 type THandleOpen = (user: IUser) => void;
 
@@ -22,34 +23,10 @@ export default function Profile(props: {
 
   const open = () => props.handleOpen(props.user)
 
-  const cardStyle = {
-      color: "#333",
-      fontSize: 17,
-      marginRight: 1
-  }
   return (
-    <Card sx={
-      {
-        maxWidth: 345, 
-        flexBasis: 260,
-        margin: {
-          xs: "0 auto"
-        }
-      }
-    }>
-      <Box onClick={open} sx={{
-        height: "200px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#ececec",
-        cursor: "pointer"
-      }}>
-        <PersonIcon sx={{
-          width: 150,
-          height: 150,
-          opacity: 0.2
-        }} />
+    <Card sx={CardStyle}>
+      <Box onClick={open} sx={BoxCenterStyle}>
+        <PersonIcon sx={PersonIconStyle} />
       </Box>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -62,7 +39,7 @@ export default function Profile(props: {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={open}><PersonIcon sx={cardStyle} /> Learn More</Button>
+        <Button size="small" onClick={open}><PersonIcon sx={ButtonStyle} /> Learn More</Button>
       </CardActions>
     </Card>
   );

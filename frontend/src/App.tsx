@@ -4,11 +4,14 @@ import * as yup from 'yup';
 import { nanoid } from "@reduxjs/toolkit";
 import dayjs, { Dayjs } from 'dayjs';
 import { Box, Container, Typography, Snackbar } from "@mui/material";
-import Profile from './components/Profile';
-import ProfileCreate from './components/ProfileCreate';
-import Form from "./components/Form";
+import Profile from './components/Profile/Profile';
+import ProfileCreate from './components/ProfileCreate/ProfileCreate';
+import Form from "./components/Form/Form";
 import { deleteUser, fetchUsers, IUser, selectAllUsers, selectCurrentUser, setCurrent, updateUser } from './api/slice';
 import { useAppSelector, useAppDispatch } from './hooks';
+import {
+  LightFontWeight, ProfileWrapper
+} from "./Style";
 
 const validationSchema = yup.object({
   email: yup
@@ -113,24 +116,16 @@ function App() {
         />
       ) : null}
       
-      <Typography variant="h4" mt={4} mb={4} sx={{ fontWeight: 200 }}>
+      <Typography variant="h4" mt={4} mb={4} sx={LightFontWeight}>
         <Box 
           component="img"
-          sx={{
-            height: 30,
-            marginRight: 1
-          }}
+          sx={{ height: 30, marginRight: 1 }}
           src={process.env.PUBLIC_URL + '/logo.png'}
         />
         / Employees
       </Typography>
 
-      <Box sx={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: 3,
-        marginBottom: 20
-      }}>
+      <Box sx={ProfileWrapper}>
         <>
           {users.value.map(user => <Profile key={user._id || nanoid()} user={user} handleOpen={handleOpen}/>)}
           <ProfileCreate  />

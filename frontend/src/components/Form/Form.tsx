@@ -3,6 +3,8 @@ import { NumericFormat } from 'react-number-format';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { LightFontWeight } from "../../Style";
+import { Delete } from "./Style";
 
 export default function Form(props: any) {
   return (
@@ -11,13 +13,11 @@ export default function Form(props: any) {
       anchor="right"
       onClose={props.close}
     >
-      <Box minWidth={"320px"} sx={{ padding: "10px" }}>
+      <Box minWidth={"320px"} p={"10px"}>
         <form onSubmit={props.formik.handleSubmit}>
-          <Box sx={{
-            padding: "20px"
-          }}>
+          <Box m={"20px"}>
             <Box mb={4} minWidth={300}>
-              <Typography variant="h5" sx={{ fontWeight: 200 }}>{props.title}</Typography>
+              <Typography variant="h5" sx={LightFontWeight}>{props.title}</Typography>
             </Box>
             <Box mb={2} minWidth={300}>
               <TextField
@@ -97,11 +97,7 @@ export default function Form(props: any) {
             </Button>
             {props.currentUser ? (
               <Box mt={2}>
-                <Typography onClick={props.onDelete} variant="subtitle2" sx={{
-                  display: "inline",
-                  cursor: "pointer",
-                  color: "#cd2020", 
-                  fontWeight: "bold" }}>Delete account?</Typography>
+                <Typography onClick={props.onDelete} variant="subtitle2" sx={Delete}>Delete account?</Typography>
               </Box>
             ) : null}
           </Box>
