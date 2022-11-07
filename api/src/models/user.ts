@@ -21,6 +21,6 @@ export interface IUser extends Document{
   removed: boolean;
   timestamp: Date;
   save(): any;
-};
+}
 
 export const User: Model<IUser> = model<IUser>('User', UserSchema);

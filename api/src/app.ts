@@ -1,14 +1,14 @@
-import express from "express";
-import { getUsers, createUser, updateUser, deleteUser } from "./controllers/user";
-import { connect } from "./config/db";
-import bodyParser from "body-parser";
+import * as express from "express";
+import * as bodyParser from "body-parser";
 import helmet from "helmet";
+import { getUsers, createUser, updateUser, deleteUser } from "./controllers/user";
+import { connectToDB } from "./config/db";
 
 const app = express();
 app.use(helmet());
 app.use(bodyParser.json({ limit: '128mb' }));
 app.use(bodyParser.urlencoded({ limit: '128mb', extended: true }));
-connect();
+connectToDB().then();
 
 app.get("/api/v1/user", getUsers);
 app.post("/api/v1/user", createUser);

@@ -50,7 +50,7 @@ function App() {
     validationSchema: validation(),
     onSubmit: (value: any) => {
       value._id = currentUser?._id;
-      value.salary = +value.salary.replace(/[\D]/g, '');
+      value.salary = +value.salary.replace(/\D/g, '');
       if (value.salary === 1) {
         value.salary = currentUser?.salary;
       }

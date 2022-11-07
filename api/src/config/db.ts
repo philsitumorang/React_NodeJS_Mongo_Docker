@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-async function connectToDB() {
+export async function connectToDB() {
   try {
     console.log('Connecting to DB...');
     await mongoose.connect(`mongodb://${process.env.MONGODB_APPLICATION_USER}:${process.env.MONGODB_APPLICATION_PASS}@${process.env.MONGODB_IP}:${process.env.MONGODB_PORT}/${process.env.MONGODB_APPLICATION_DATABASE}`);
@@ -12,7 +12,3 @@ async function connectToDB() {
     }, 2000)
   }
 }
-
-export async function connect() {
-  await connectToDB();
-};
